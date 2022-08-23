@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  api:
+    container_name: api
+    build:
+      # context: you should put the root path of the project
+      # this affect on Dockerfile also
+      context: ../../.
+      dockerfile: docker/dockerfiles/development.Dockerfile
+    restart: always
+#   command: sh ./docker/commands.sh
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=api.settings.development
+
+
+

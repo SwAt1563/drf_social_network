@@ -1,0 +1,20 @@
+version: '3'
+
+
+
+services:
+  frontend:
+    container_name: frontend
+    build: .
+    restart: always
+#   command: sh commands.sh
+    ports:
+      - "6123:6123"
+    volumes:
+      - frontend-data:/code
+
+
+
+
+volumes:
+  frontend-data:

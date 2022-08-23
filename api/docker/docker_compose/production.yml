@@ -1,0 +1,54 @@
+version: '3'
+
+networks:
+  apps_link:
+    driver: bridge
+
+services:
+  api:
+    container_name: api
+    depends_on:
+      - db
+    build:
+      # context: you should put the root path of the project
+      # this affect on Dockerfile also
+      context: ../../.
+      dockerfile: docker/dockerfiles/production.Dockerfile
+    restart: always
+#   command: sh ./docker/commands.sh
+    volumes:
+      - api-data:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - HOST=db
+      - PORT=5432
+      - DJANGO_SETTINGS_MODULE=api.settings.production
+
+
+    networks:
+      - apps_link
+
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - apps_link
+
+
+volumes:
+  db:
+  api-data:
