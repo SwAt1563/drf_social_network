@@ -7,7 +7,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('home.urls', namespace='home')),
     path('registration/', include('registration.urls', namespace='registration')),
+    path('profile/', include('user_profile.urls', namespace='user_profile')),
+
 ]
 
 
