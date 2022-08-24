@@ -10,6 +10,8 @@ urlpatterns = [
     path('', include('home.urls', namespace='home')),
     path('registration/', include('registration.urls', namespace='registration')),
     path('profile/', include('user_profile.urls', namespace='user_profile')),
+    path('settings/', include('user_settings.urls', namespace='user_settings')),
+    path('post/', include('post.urls', namespace='post')),
 
 ]
 

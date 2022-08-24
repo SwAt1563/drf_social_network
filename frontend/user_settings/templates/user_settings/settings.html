@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}
+Settings
+{% endblock %}
+{% block content %}
+<div class="container bootstrap snippets bootdey">
+    <h1 class="text-primary">Settings</h1>
+      <hr>
+	<div class="row">
+
+      <!-- edit form column -->
+
+
+        <form class="form-horizontal" role="form" method="post" action="">
+            {% csrf_token %}
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Old Password:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="password" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">New password:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="password" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Confirm new password:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="password" value="">
+            </div>
+          </div>
+
+            <div class="form-group" style="text-align: center">
+             <input class="btn btn-success" type="submit" value="Change password">
+
+            </div>
+
+        </form>
+                    <form class="form-horizontal" role="form" method="post" action="">
+                        {% csrf_token %}
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="email" value="janesemail@gmail.com">
+            </div>
+          </div>
+                        <div class="form-group" style="text-align: center">
+             <input class="btn btn-success" type="submit" value="Change Email">
+
+            </div>
+                    </form>
+                                <form class="form-horizontal" role="form" method="post" action="">
+                                    {% csrf_token %}
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Active:</label>
+            <div class="col-lg-8">
+                <div class="form-check">
+      <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
+      <label class="form-check-label" for="radio1">On</label>
+    </div>
+    <div class="form-check">
+      <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
+      <label class="form-check-label" for="radio2">Off</label>
+    </div>
+            </div>
+          </div>
+                                    <div class="form-group" style="text-align: center">
+             <input class="btn btn-success" type="submit" value="Change status">
+
+            </div>
+        </form>
+      </div>
+  </div>
+</div>
+<hr>
+{% endblock %}

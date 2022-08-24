@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Edit Profile
+{% endblock %}
+
+{% block content %}
+
+  <!-- main -->
+  <main class="container">
+
+      <div class="container bootstrap snippets bootdey">
+    <h1 class="text-primary">Edit Profile</h1>
+      <hr>
+	<div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="{% static 'home/img/my_avatar.png' %}" class="avatar img-circle img-thumbnail" alt="avatar">
+          <h6>Upload a different photo...</h6>
+
+          <input type="file" class="form-control">
+        </div>
+      </div>
+
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+
+        <h3>Personal info</h3>
+
+        <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+         {% csrf_token %}
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="bootdey">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Address:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="Tulkarm">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-lg-8" style="text-align: center;">
+             <input class="btn btn-success" type="submit" value="Save"/>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+<hr>
+
+
+
+</main>
+
+{% endblock %}
