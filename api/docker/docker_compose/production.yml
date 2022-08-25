@@ -1,7 +1,8 @@
 version: '3'
 
+# network shared between containers
 networks:
-  apps_link:
+  bridge-network:
     driver: bridge
 
 services:
@@ -27,6 +28,12 @@ services:
       - HOST=db
       - PORT=5432
       - DJANGO_SETTINGS_MODULE=api.settings.production
+      - REDIS_URL=redis://redis:6379/0
+      - REDIS_DB=1
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CELERY_BROKER_URL=redis://redis:6379
+      - CELERY_RESULT_BACKEND=redis://redis:6379
 
 
     networks:
@@ -48,7 +55,42 @@ services:
     networks:
       - apps_link
 
+  redis:
+    container_name: redis-server
+    image: redis:alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    networks:
+      - bridge-network
+
+  celery:
+    restart: always
+    build:
+      context: ../../.
+      dockerfile: docker/dockerfiles/development.Dockerfile
+    command: celery -A api worker -l info
+    volumes:
+      - celery:/code
+    container_name: celery
+    # it is need postgres environments for get objects from database
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379
+      - CELERY_RESULT_BACKEND=redis://redis:6379
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - HOST=db
+      - PORT=5432
+    depends_on:
+      - redis
+      - api
+      - db
+    networks:
+      - bridge-network
+
 
 volumes:
   db:
   api-data:
+  celery:

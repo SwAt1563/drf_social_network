@@ -124,3 +124,14 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'account.UserAccount'
+
+
+REDIS_HOST = os.environ.get('REDIS_HOST')
+REDIS_PORT = os.environ.get('REDIS_PORT')
+REDIS_DB = os.environ.get('REDIS_DB')
+
+
+# Connect Celery with redis url
+# if you want to use python environment then uncomment these lines
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')
