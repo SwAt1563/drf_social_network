@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 class UserAccount(AbstractUser):
     # for Deactivate Account
-    status = models.BooleanField(default=True, blank=True)
+    # we should use is_active attribute
 
     def __str__(self):
         return self.username

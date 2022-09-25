@@ -6,11 +6,10 @@ from .mangers import FriendListManger
 
 
 class FriendList(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-                             related_name='user')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+                                related_name='user')
     friends = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
-                                     related_name='friends',
-                                     on_delete=models.SET_DEFAULT)
+                                     related_name='friends')
 
     objects = FriendListManger()
 
@@ -38,8 +37,8 @@ class FriendRequest(models.Model):
     objects = FriendRequestManger()
 
     def accept(self):
-        sender = FriendList.objects.get(self.from_user)
-        receiver = FriendList.objects.get(self.to_user)
+        sender = FriendList.objects.get(user=self.from_user)
+        receiver = FriendList.objects.get(user=self.to_user)
         if sender and receiver:
             sender.add_friend(receiver)
             receiver.add_friend(sender)

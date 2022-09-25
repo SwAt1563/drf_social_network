@@ -110,7 +110,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Sqlite Database
-# Not required you can remove it
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -125,3 +124,11 @@ MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+
+# The network that shared between the frontend and backend
+# you can see it from the services in pycharm tools bar (bottom bar)
+
+API_NETWORK_HOST = '172.18.0.2'
+API_PORT = '8000'

@@ -1,9 +1,10 @@
-version: '3'
+version: '3.5'
 
 # network shared between containers
 networks:
-  bridge-network:
-    driver: bridge
+    net:
+      name: api_network
+      driver: bridge
 
 services:
   api:
@@ -37,7 +38,7 @@ services:
 
 
     networks:
-      - apps_link
+      - net
 
 
   db:
@@ -53,7 +54,7 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
     networks:
-      - apps_link
+      - net
 
   redis:
     container_name: redis-server
@@ -62,7 +63,7 @@ services:
     ports:
       - '6379:6379'
     networks:
-      - bridge-network
+      - net
 
   celery:
     restart: always
@@ -82,12 +83,14 @@ services:
       - POSTGRES_PASSWORD=postgres
       - HOST=db
       - PORT=5432
+      - DJANGO_SETTINGS_MODULE=api.settings.production
+
     depends_on:
       - redis
       - api
       - db
     networks:
-      - bridge-network
+      - net
 
 
 volumes:

@@ -6,9 +6,9 @@ from django.urls import reverse
 
 
 class Profile(models.Model):
-    name = models.CharField(max_length=50)
-    slug = AutoSlugField(unique=True, populate_from='name')
-    location = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, blank=True)
+    slug = AutoSlugField(unique=True, populate_from='name', always_update=True)
+    location = models.CharField(max_length=50, blank=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True, upload_to='users_images/')
 

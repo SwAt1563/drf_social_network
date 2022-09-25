@@ -5,4 +5,8 @@ tzdata==2022.2
 djangorestframework==3.13
 django-autoslug==1.9.8
 celery==5.2.7
-
+djangorestframework-simplejwt==5.2.0
+Pillow==9.2.0
+redis==4.3.4
+django-cors-headers==3.13.0
+httpie==3.2.1

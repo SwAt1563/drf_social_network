@@ -11,26 +11,26 @@
 
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form action="#">
+		<form id='register_form' action="" method="post">
 
 			<h1>Create Account</h1>
 			<div class="social-container">
 			</div>
 
-			<input type="text" placeholder="Username" />
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-            <input type="password" placeholder="Confirm password" />
+			<input type="text" placeholder="Username" name="username"/>
+			<input type="email" placeholder="Email" name="email"/>
+			<input type="password" placeholder="Password" name="password"/>
+            <input type="password" placeholder="Confirm password" name="password2"/>
 			<button type="submit">Sign Up</button>
 		</form>
 	</div>
 	<div class="form-container sign-in-container">
-		<form action="#">
+		<form id='login_form' action="#" method="post">
 			<h1>Sign in</h1>
 			<div class="social-container">
 			</div>
-			<input type="text" placeholder="Username" />
-			<input type="password" placeholder="Password" />
+			<input type="text" placeholder="Username" name="username"/>
+			<input type="password" placeholder="Password" name="password"/>
 			<button type="submit">Sign In</button>
 		</form>
 	</div>
@@ -50,7 +50,8 @@
 	</div>
 </div>
 
-
+<script src="{% static 'registration/api/register.js' %}"></script>
+<script src="{% static 'registration/api/login.js' %}"></script>
 <script src="{% static 'registration/js/registration.js' %}"></script>
 </body>
 </html>

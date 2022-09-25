@@ -1,9 +1,11 @@
-version: '3'
+version: '3.5'
 
 # network shared between containers
 networks:
-  bridge-network:
-    driver: bridge
+    net:
+        driver: bridge
+        name: api_network
+
 
 services:
   api:
@@ -26,7 +28,8 @@ services:
       - CELERY_BROKER_URL=redis://redis:6379
       - CELERY_RESULT_BACKEND=redis://redis:6379
     networks:
-      - bridge-network
+      - net
+
 
   redis:
     container_name: redis-server
@@ -35,7 +38,7 @@ services:
     ports:
       - '6379:6379'
     networks:
-      - bridge-network
+      - net
 
   celery:
     restart: always
@@ -50,11 +53,12 @@ services:
     environment:
       - CELERY_BROKER_URL=redis://redis:6379
       - CELERY_RESULT_BACKEND=redis://redis:6379
+      - DJANGO_SETTINGS_MODULE=api.settings.development
     depends_on:
       - redis
       - api
     networks:
-      - bridge-network
+      - net
 
 
 volumes:

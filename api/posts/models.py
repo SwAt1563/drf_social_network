@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from autoslug import AutoSlugField
-
+from django.urls import reverse
 # Create your models here.
 
 
@@ -31,10 +31,13 @@ class Unlike(models.Model):
 
 
 class Post(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     text = models.CharField(max_length=1000)
     slug = AutoSlugField(unique=True, populate_from='user.username')
 
 
     def __str__(self):
         return self.text
+
+    def get_absolute_path(self):
+        return reverse('posts:view', args=[self.slug])

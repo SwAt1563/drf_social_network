@@ -1,5 +1,10 @@
-version: '3'
+version: '3.5'
 
+
+networks:
+    frontend-net:
+        name: api_network  # for use the network which created in the api compose file
+        external: true  # for search on external network with name: api_network
 
 
 services:
@@ -12,7 +17,8 @@ services:
       - "6123:6123"
     volumes:
       - frontend-data:/code
-
+    networks:  # same network of the api
+      - frontend-net
 
 volumes:
   frontend-data:
